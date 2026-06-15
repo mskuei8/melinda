@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="slides-format" content="viewport">
+    <title>ADHD in Women: The Full Picture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg: #0d1117;
+            --color-bg-deep: #060810;
+            --color-surface: #161b22;
+            --color-text: #f0f6fc;
+            --color-text-secondary: #c9d1d9;
+            --color-text-muted: #8b949e;
+            --color-accent-1: #d946ef;
+            --color-accent-2: #f97316;
+            --color-accent-3: #a78bfa;
+            --color-glass-bg: rgba(255,255,255,0.06);
+            --color-glass-border: rgba(255,255,255,0.09);
+            --color-vignette: rgba(0,0,0,0.45);
+            --font-display: 'DM Serif Display', serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+    </style>
+    <style>
+        :root { --color-bg:#0d1117; --color-text:#f0f6fc; --glow-color-rgb:217,70,239; }
+        *,*::before,*::after{box-sizing:border-box}
+        html,body{background:var(--color-bg);margin:0}
+        body{font-family:'DM Sans',sans-serif;color:var(--color-text);overflow:hidden;height:100vh;width:100vw}
+        .deck{width:100vw;height:100vh;position:relative}
+        .slide{position:absolute;top:0;left:0;width:100%;height:100%;background:var(--color-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(0.95);transition:opacity 0.7s ease,transform 0.7s ease;pointer-events:none;overflow:hidden}
+        .slide.active{opacity:1;transform:scale(1);pointer-events:all}
+        .slide>.content{position:relative;z-index:2;width:100%;max-width:1100px;padding:clamp(1.2rem,3.5vw,3.5rem)}
+        .nav-controls{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;z-index:100;background:rgba(255,255,255,0.06);backdrop-filter:blur(10px);padding:8px 20px;border-radius:40px;border:1px solid rgba(255,255,255,0.09)}
+        .nav-btn{width:36px;height:36px;border:none;background:rgba(255,255,255,0.07);color:#d946ef;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.3s}
+        .nav-btn:hover{background:rgba(217,70,239,0.18)}
+        .slide-dots{display:flex;gap:7px}
+        .slide-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);cursor:pointer;transition:background 0.3s,transform 0.3s}
+        .slide-dots .dot.active{background:#d946ef;transform:scale(1.3)}
+        .slide-counter{font-size:0.75rem;color:#8b949e;min-width:36px;text-align:center}
+        .reveal{opacity:0;transform:translateY(20px)}
+        .gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+        .blob{position:absolute;border-radius:50%;filter:blur(80px);animation:float-slow 10s ease-in-out infinite}
+        .blob:nth-child(2){animation:float-drift 14s ease-in-out infinite}
+        .blob:nth-child(3){animation:float-slow 18s ease-in-out infinite reverse}
+        @keyframes float-slow{0%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-50px) scale(1.12)}50%{transform:translate(-40px,40px) scale(0.9)}75%{transform:translate(50px,20px) scale(1.08)}100%{transform:translate(0,0) scale(1)}}
+        @keyframes float-drift{0%{transform:translate(0,0) scale(1) rotate(0deg)}33%{transform:translate(-50px,-60px) scale(1.15) rotate(3deg)}66%{transform:translate(40px,30px) scale(0.88) rotate(-2deg)}100%{transform:translate(0,0) scale(1) rotate(0deg)}}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+        .text-glow{text-shadow:0 0 20px rgba(217,70,239,0.5),0 0 40px rgba(217,70,239,0.2)}
+        .stat-glow{text-shadow:0 0 30px rgba(217,70,239,0.6),0 0 60px rgba(217,70,239,0.25)}
+        @keyframes glow-pulse{0%,100%{text-shadow:0 0 20px rgba(217,70,239,0.5),0 0 40px rgba(217,70,239,0.2)}50%{text-shadow:0 0 30px rgba(217,70,239,0.8),0 0 60px rgba(217,70,239,0.3)}}
+        .glow-pulse{animation:glow-pulse 3s ease-in-out infinite}
+        .slide::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px;opacity:0.03;mix-blend-mode:overlay}
+        .slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,var(--color-vignette) 100%)}
+        sup a{color:#d946ef;text-decoration:none;font-size:0.65em;vertical-align:super;margin-left:1px}
+        sup a:hover{text-decoration:underline;color:#f97316}
+        .refs-slide .content{overflow-y:auto;max-height:88vh;padding-bottom:4rem}
+        .refs-slide .content::-webkit-scrollbar{width:5px}
+        .refs-slide .content::-webkit-scrollbar-thumb{background:rgba(217,70,239,0.3);border-radius:4px}
+        .ref-item{display:flex;gap:0.6rem;margin-bottom:0.55rem;font-size:0.72rem;line-height:1.6;color:#c9d1d9}
+        .ref-num{color:#d946ef;font-weight:700;min-width:1.6rem;flex-shrink:0;padding-top:1px}
+        .ref-item a{color:#a78bfa;text-decoration:underline;word-break:break-all}
+        .ref-item a:hover{color:#d946ef}
+        .pill{display:inline-block;padding:0.18rem 0.6rem;border-radius:99px;font-size:0.68rem;font-weight:600;margin-right:0.3rem;margin-bottom:0.3rem}
+        .pill-pink{background:rgba(217,70,239,0.15);color:#d946ef;border:1px solid rgba(217,70,239,0.3)}
+        .pill-orange{background:rgba(249,115,22,0.15);color:#f97316;border:1px solid rgba(249,115,22,0.3)}
+        .pill-violet{background:rgba(167,139,250,0.15);color:#a78bfa;border:1px solid rgba(167,139,250,0.3)}
+        .pill-teal{background:rgba(20,184,166,0.15);color:#14b8a6;border:1px solid rgba(20,184,166,0.3)}
+        .stat-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.09);border-radius:14px;padding:0.9rem 1.1rem;transition:transform 0.25s,box-shadow 0.25s}
+        .stat-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(217,70,239,0.15)}
+        .stat-big{font-family:'DM Serif Display',serif;font-size:clamp(1.7rem,3.2vw,2.6rem);font-weight:400}
+        .bar-track{background:rgba(255,255,255,0.07);border-radius:6px;height:20px;overflow:hidden}
+        .bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#d946ef,#a78bfa);width:0%;transition:width 0.8s ease}
+        .bar-label{font-size:0.71rem;color:#8b949e;margin-bottom:3px}
+        .bar-val{font-size:0.71rem;color:#d946ef;font-weight:700;margin-left:7px}
+        .timeline-line{position:absolute;left:18px;top:20px;bottom:0;width:2px;background:linear-gradient(180deg,#d946ef,#a78bfa,transparent)}
+        .timeline-dot{width:14px;height:14px;border-radius:50%;background:#d946ef;box-shadow:0 0 12px rgba(217,70,239,0.6);flex-shrink:0;margin-top:4px}
+        .border-card{border-left:3px solid;border-radius:10px;padding:0.75rem 0.95rem;background:rgba(255,255,255,0.04);margin-bottom:0.55rem}
+        .bc-pink{border-color:#d946ef}.bc-orange{border-color:#f97316}.bc-violet{border-color:#a78bfa}.bc-teal{border-color:#14b8a6}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.2s !important}}
+    </style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none;"></div>
+<div class="deck">
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide active" data-slide="1">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:520px;height:520px;top:-120px;right:-100px;background:#d946ef;opacity:0.13;"></div>
+        <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#f97316;opacity:0.10;"></div>
+        <div class="blob" style="width:220px;height:220px;top:40%;left:12%;background:#a78bfa;opacity:0.10;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div style="font-size:88px;animation:float 3s ease-in-out infinite;margin-bottom:0.9rem;" class="reveal">🧠</div>
+        <h1 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(2.3rem,5.5vw,4.5rem);font-weight:400;background:linear-gradient(135deg,#d946ef,#f97316,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 0.6rem;line-height:1.1;">
+            Attention Deficit Hyperactivity<br>Disorder (ADHD) in Women
+        </h1>
+        <p class="reveal" style="font-size:clamp(0.82rem,1.4vw,1.1rem);color:#8b949e;letter-spacing:5px;text-transform:uppercase;font-weight:500;margin:0 0 0.8rem;">The Full Picture · 2026 Edition</p>
+        <p class="reveal" style="font-size:0.82rem;color:#8b949e;max-width:560px;margin:0 auto;">Physiological · Societal · Cultural · Economic · Taiwan-Specific<br>
+        <span style="font-size:0.72rem;opacity:0.7;">Use arrow keys, swipe, or navigation dots · Slide 15 = full references</span></p>
+    </div>
+</div>
+
+<!-- SLIDE 2: SCALE -->
+<div class="slide" data-slide="2">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;right:-60px;background:#d946ef;opacity:0.09;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-50px;left:-40px;background:#a78bfa;opacity:0.07;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#d946ef;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Scale of the Problem</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3.2vw,2.3rem);margin:0 0 1rem;">Attention Deficit Hyperactivity Disorder (ADHD) is everywhere — and largely invisible in women</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.9rem;" class="reveal">
+            <div class="stat-card">
+                <div class="stat-big text-glow" style="color:#d946ef;">366M</div>
+                <div style="color:#8b949e;font-size:0.72rem;margin-top:0.3rem;">Adults with symptomatic Attention Deficit Hyperactivity Disorder (ADHD) globally<sup><a href="#ref1" onclick="jumpToRef('ref1');return false;">1</a></sup></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-big text-glow" style="color:#f97316;">6.76%</div>
+                <div style="color:#8b949e;font-size:0.72rem;margin-top:0.3rem;">Global adult prevalence of Attention Deficit Hyperactivity Disorder (ADHD)<sup><a href="#ref1" onclick="jumpToRef('ref1');return false;">1</a></sup></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-big text-glow" style="color:#a78bfa;">3:1 → 1:1</div>
+                <div style="color:#8b949e;font-size:0.72rem;margin-top:0.3rem;">Male-to-female diagnosis ratio in childhood vs. near-equal in adulthood — revealing massive missed diagnoses in girls<sup><a href="#ref2" onclick="jumpToRef('ref2');return false;">2</a></sup></div>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;margin-top:0.9rem;" class="reveal">
+            <div class="stat-card">
+                <div style="font-size:0.78rem;color:#8b949e;margin-bottom:0.5rem;">Taiwan: Clinical diagnosis rate vs. real prevalence<sup><a href="#ref3" onclick="jumpToRef('ref3');return false;">3</a></sup></div>
+                <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.45rem;">
+                    <span style="font-size:0.7rem;color:#8b949e;min-width:85px;">Diagnosed</span>
+                    <div class="bar-track" style="flex:1;"><div class="bar-fill" data-width="12"></div></div>
+                    <span style="font-size:0.7rem;color:#d946ef;font-weight:700;">~1.24%</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;">
+                    <span style="font-size:0.7rem;color:#8b949e;min-width:85px;">True prevalence</span>
+                    <div class="bar-track" style="flex:1;"><div class="bar-fill" data-width="75" style="background:linear-gradient(90deg,#f97316,#d946ef);"></div></div>
+                    <span style="font-size:0.7rem;color:#f97316;font-weight:700;">~7.5%</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:0.78rem;color:#c9d1d9;margin-bottom:0.4rem;">Boys diagnosed at <span style="color:#d946ef;font-weight:700;">2–3×</span> higher rates than girls<sup><a href="#ref4" onclick="jumpToRef('ref4');return false;">4</a></sup></div>
+                <div style="font-size:0.76rem;color:#8b949e;">Adult Attention Deficit Hyperactivity Disorder (ADHD) in Taiwan: <span style="color:#f97316;font-weight:700;">0.028%</span> diagnosed — vs. ~3–5% in Western countries<sup><a href="#ref5" onclick="jumpToRef('ref5');return false;">5</a></sup></div>
+                <div style="font-size:0.76rem;color:#8b949e;margin-top:0.4rem;">Taiwan incidence grew <span style="color:#a78bfa;font-weight:700;">10.9×</span> from 2000–2011 — still severely under-diagnosed<sup><a href="#ref5" onclick="jumpToRef('ref5');return false;">5</a></sup></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 3: WHY WOMEN ARE MISSED -->
+<div class="slide" data-slide="3">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:400px;height:400px;top:-90px;left:-80px;background:#f97316;opacity:0.09;"></div>
+        <div class="blob" style="width:280px;height:280px;bottom:-60px;right:-40px;background:#d946ef;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#f97316;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Diagnostic Barriers</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">Why women are missed: symptom bias &amp; systemic gaps</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;" class="reveal">
+            <div class="border-card bc-pink">
+                <div style="font-size:0.77rem;font-weight:700;color:#d946ef;margin-bottom:0.25rem;">🎭 Symptom presentation</div>
+                <div style="font-size:0.72rem;color:#c9d1d9;">Girls show <strong>inattentive</strong> symptoms, not hyperactive. Daydreaming, disorganisation, emotional sensitivity — mislabelled as "shy" or "anxious."<sup><a href="#ref4" onclick="jumpToRef('ref4');return false;">4</a></sup></div>
+            </div>
+            <div class="border-card bc-orange">
+                <div style="font-size:0.77rem;font-weight:700;color:#f97316;margin-bottom:0.25rem;">🏥 Clinician bias</div>
+                <div style="font-size:0.72rem;color:#c9d1d9;">Girls need <strong>more severe symptoms</strong> than boys before referral for Attention Deficit Hyperactivity Disorder (ADHD) assessment. The diagnostic model was built on young boys.<sup><a href="#ref2" onclick="jumpToRef('ref2');return false;">2</a></sup></div>
+            </div>
+            <div class="border-card bc-violet">
+                <div style="font-size:0.77rem;font-weight:700;color:#a78bfa;margin-bottom:0.25rem;">🔀 Comorbidity masking</div>
+                <div style="font-size:0.72rem;color:#c9d1d9;"><strong>44% of women</strong> are first diagnosed with anxiety or depression — while Attention Deficit Hyperactivity Disorder (ADHD) remains hidden.<sup><a href="#ref6" onclick="jumpToRef('ref6');return false;">6</a></sup></div>
+            </div>
+            <div class="border-card bc-teal">
+                <div style="font-size:0.77rem;font-weight:700;color:#14b8a6;margin-bottom:0.25rem;">📋 Flawed diagnostic tools</div>
+                <div style="font-size:0.72rem;color:#c9d1d9;">Diagnostic criteria (Diagnostic and Statistical Manual / DSM) were validated on male populations. Rating scales fail to capture female-typical presentations.<sup><a href="#ref7" onclick="jumpToRef('ref7');return false;">7</a></sup></div>
+            </div>
+            <div class="border-card bc-pink" style="grid-column:1/-1;margin-bottom:0;">
+                <div style="font-size:0.77rem;font-weight:700;color:#d946ef;margin-bottom:0.25rem;">⏰ Late diagnosis timeline</div>
+                <div style="font-size:0.72rem;color:#c9d1d9;">Women are diagnosed <strong>years to decades</strong> after men — often only after a child is diagnosed. <strong>Up to 75%</strong> of women with Attention Deficit Hyperactivity Disorder (ADHD) have been misdiagnosed with another condition.<sup><a href="#ref4" onclick="jumpToRef('ref4');return false;">4</a></sup><sup><a href="#ref2" onclick="jumpToRef('ref2');return false;">2</a></sup></div>
+            </div>
+        </div>
+        <div class="reveal" style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.8rem;">
+            <span class="pill pill-pink">Women 4× more likely misdiagnosed with Major Depressive Disorder (MDD)<sup><a href="#ref8" onclick="jumpToRef('ref8');return false;">8</a></sup></span>
+            <span class="pill pill-orange">Girls 3× more likely misdiagnosed with anxiety<sup><a href="#ref8" onclick="jumpToRef('ref8');return false;">8</a></sup></span>
+            <span class="pill pill-violet">70% with co-occurring Attention Deficit Hyperactivity Disorder (ADHD) + anxiety misdiagnosed with anxiety alone<sup><a href="#ref8" onclick="jumpToRef('ref8');return false;">8</a></sup></span>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 4: MASKING & BURNOUT -->
+<div class="slide" data-slide="4">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-70px;right:-70px;background:#a78bfa;opacity:0.10;"></div>
+        <div class="blob" style="width:240px;height:240px;bottom:-50px;left:-30px;background:#d946ef;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#a78bfa;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">The Hidden Cost</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">Masking &amp; the burnout cycle</h2>
+        <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:1.1rem;">
+            <div class="reveal">
+                <div style="font-size:0.78rem;color:#c9d1d9;line-height:1.7;margin-bottom:0.7rem;background:rgba(167,139,250,0.07);border-radius:8px;padding:0.6rem;">
+                    <strong style="color:#a78bfa;">Masking</strong> = hiding or camouflaging Attention Deficit Hyperactivity Disorder (ADHD) symptoms to meet social expectations. Women do this far more than men — making them appear "fine" while internally struggling.<sup><a href="#ref9" onclick="jumpToRef('ref9');return false;">9</a></sup>
+                </div>
+                <div class="border-card bc-violet"><div style="font-size:0.72rem;color:#c9d1d9;">📌 Constant self-monitoring of behaviour &amp; speech<sup><a href="#ref10" onclick="jumpToRef('ref10');return false;">10</a></sup></div></div>
+                <div class="border-card bc-pink"><div style="font-size:0.72rem;color:#c9d1d9;">📌 Compensating with perfectionism, overworking &amp; over-preparing<sup><a href="#ref9" onclick="jumpToRef('ref9');return false;">9</a></sup></div></div>
+                <div class="border-card bc-orange"><div style="font-size:0.72rem;color:#c9d1d9;">📌 Mimicking neurotypical behaviour in social and work settings<sup><a href="#ref10" onclick="jumpToRef('ref10');return false;">10</a></sup></div></div>
+                <div class="border-card bc-teal" style="margin-bottom:0;"><div style="font-size:0.72rem;color:#c9d1d9;">📌 Eventual <strong>burnout</strong>, breakdown, exhaustion, and mental health crisis<sup><a href="#ref9" onclick="jumpToRef('ref9');return false;">9</a></sup></div></div>
+            </div>
+            <div class="reveal">
+                <div style="font-size:0.77rem;font-weight:700;color:#a78bfa;margin-bottom:0.7rem;">The Burnout Cycle</div>
+                <div style="position:relative;padding-left:2.2rem;">
+                    <div class="timeline-line" style="top:12px;"></div>
+                    <div style="display:flex;gap:0.55rem;margin-bottom:0.65rem;align-items:flex-start;">
+                        <div class="timeline-dot" style="margin-left:-18px;background:#d946ef;"></div>
+                        <div style="font-size:0.71rem;color:#c9d1d9;"><strong style="color:#d946ef;">Mask up</strong> — suppress symptoms, overcompensate</div>
+                    </div>
+                    <div style="display:flex;gap:0.55rem;margin-bottom:0.65rem;align-items:flex-start;">
+                        <div class="timeline-dot" style="margin-left:-18px;background:#f97316;"></div>
+                        <div style="font-size:0.71rem;color:#c9d1d9;"><strong style="color:#f97316;">Perform</strong> — appears functional, even high-achieving</div>
+                    </div>
+                    <div style="display:flex;gap:0.55rem;margin-bottom:0.65rem;align-items:flex-start;">
+                        <div class="timeline-dot" style="margin-left:-18px;background:#a78bfa;"></div>
+                        <div style="font-size:0.71rem;color:#c9d1d9;"><strong style="color:#a78bfa;">Drain</strong> — cognitive &amp; emotional reserves depleted</div>
+                    </div>
+                    <div style="display:flex;gap:0.55rem;margin-bottom:0.65rem;align-items:flex-start;">
+                        <div class="timeline-dot" style="margin-left:-18px;background:#14b8a6;"></div>
+                        <div style="font-size:0.71rem;color:#c9d1d9;"><strong style="color:#14b8a6;">Crash</strong> — burnout, breakdown, sick leave</div>
+                    </div>
+                    <div style="display:flex;gap:0.55rem;align-items:flex-start;">
+                        <div class="timeline-dot" style="margin-left:-18px;background:#d946ef;"></div>
+                        <div style="font-size:0.71rem;color:#c9d1d9;"><strong style="color:#d946ef;">Repeat</strong> — no diagnosis = no explanation or support</div>
+                    </div>
+                </div>
+                <div style="margin-top:0.9rem;font-size:0.71rem;color:#8b949e;background:rgba(217,70,239,0.08);border-radius:8px;padding:0.6rem;">
+                    <strong style="color:#d946ef;">89%</strong> of women with Attention Deficit Hyperactivity Disorder (ADHD) attribute neurobiological symptoms to character flaws — believing they are lazy, stupid, or broken.<sup><a href="#ref6" onclick="jumpToRef('ref6');return false;">6</a></sup>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: HORMONES -->
+<div class="slide" data-slide="5">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:420px;height:420px;top:-80px;right:-80px;background:#f97316;opacity:0.10;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-50px;left:-40px;background:#d946ef;opacity:0.09;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#f97316;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Physiology</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.7rem;">Hormones: the invisible Attention Deficit Hyperactivity Disorder (ADHD) amplifier</h2>
+        <div style="font-size:0.77rem;color:#c9d1d9;line-height:1.65;margin-bottom:0.8rem;" class="reveal">
+            Oestrogen (Estrogen) boosts dopamine — the key neurotransmitter (chemical brain messenger) that Attention Deficit Hyperactivity Disorder (ADHD) brains already lack. When oestrogen drops, Attention Deficit Hyperactivity Disorder (ADHD) symptoms worsen. This happens <em>every month</em>, and permanently at perimenopause (the transition to menopause).<sup><a href="#ref11" onclick="jumpToRef('ref11');return false;">11</a></sup><sup><a href="#ref12" onclick="jumpToRef('ref12');return false;">12</a></sup>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem;" class="reveal">
+            <div class="stat-card">
+                <div style="font-size:0.78rem;font-weight:700;color:#f97316;margin-bottom:0.35rem;">📅 Menstrual cycle</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;line-height:1.6;">Low oestrogen (premenstrual phase) → worse inattention &amp; impulsivity. High oestrogen (late follicular phase) → reduced symptoms. Same woman, completely different presentation depending on cycle timing.<sup><a href="#ref11" onclick="jumpToRef('ref11');return false;">11</a></sup></div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:0.78rem;font-weight:700;color:#d946ef;margin-bottom:0.35rem;">🤰 Pregnancy &amp; postpartum</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;line-height:1.6;">Oestrogen surges during pregnancy may ease symptoms — then the postpartum drop triggers severe worsening. Postpartum Depression (PPD) risk is elevated and often misattributed.<sup><a href="#ref7" onclick="jumpToRef('ref7');return false;">7</a></sup></div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:0.78rem;font-weight:700;color:#a78bfa;margin-bottom:0.35rem;">🌡️ Perimenopause &amp; menopause</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;line-height:1.6;">Permanent oestrogen decline in midlife = dramatic Attention Deficit Hyperactivity Disorder (ADHD) deterioration. Many women first diagnosed in their 40s–50s as life becomes unmanageable.<sup><a href="#ref7" onclick="jumpToRef('ref7');return false;">7</a></sup></div>
+            </div>
+            <div class="stat-card">
+                <div style="font-size:0.78rem;font-weight:700;color:#14b8a6;margin-bottom:0.35rem;">💊 Medication implications</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;line-height:1.6;">Women may need <strong>higher stimulant doses</strong> in low-oestrogen phases — yet dosing protocols were built on male bodies. Risk of chronic under-dosing or over-dosing based on cycle phase.<sup><a href="#ref12" onclick="jumpToRef('ref12');return false;">12</a></sup></div>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top:0.7rem;font-size:0.71rem;color:#8b949e;background:rgba(249,115,22,0.07);border-radius:8px;padding:0.55rem 0.8rem;">
+            ⚠️ Undiagnosed women face elevated risk of Premenstrual Dysphoric Disorder (PMDD), Postpartum Depression (PPD), and cardiovascular disease during perimenopause.<sup><a href="#ref7" onclick="jumpToRef('ref7');return false;">7</a></sup>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 6: MENTAL HEALTH -->
+<div class="slide" data-slide="6">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:400px;height:400px;top:-80px;left:-70px;background:#d946ef;opacity:0.11;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-40px;right:-40px;background:#a78bfa;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#d946ef;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Mental Health Impact</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">The mental health crisis hiding inside Attention Deficit Hyperactivity Disorder (ADHD)</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;" class="reveal">
+            <div class="stat-card" style="border-top:2px solid #d946ef;">
+                <div class="stat-big stat-glow" style="color:#d946ef;">46%</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">of women with Attention Deficit Hyperactivity Disorder (ADHD) have seriously considered suicide — vs. ~10% without<sup><a href="#ref13" onclick="jumpToRef('ref13');return false;">13</a></sup></div>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #f97316;">
+                <div class="stat-big" style="color:#f97316;">24%</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">lifetime suicide attempt rate for women with Attention Deficit Hyperactivity Disorder (ADHD) vs. 3% without<sup><a href="#ref14" onclick="jumpToRef('ref14');return false;">14</a></sup></div>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #a78bfa;">
+                <div class="stat-big" style="color:#a78bfa;">72%</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">have 3+ other mental health conditions at the same time<sup><a href="#ref6" onclick="jumpToRef('ref6');return false;">6</a></sup></div>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.8rem;" class="reveal">
+            <div>
+                <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">Condition rates in women with Attention Deficit Hyperactivity Disorder (ADHD)<sup><a href="#ref13" onclick="jumpToRef('ref13');return false;">13</a></sup></div>
+                <div style="margin-bottom:0.38rem;">
+                    <div class="bar-label">Generalised Anxiety Disorder (GAD)</div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><div class="bar-track" style="flex:1;"><div class="bar-fill" data-width="36"></div></div><span class="bar-val">36%</span></div>
+                </div>
+                <div style="margin-bottom:0.38rem;">
+                    <div class="bar-label">Major Depressive Disorder (MDD)</div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><div class="bar-track" style="flex:1;"><div class="bar-fill" data-width="31" style="background:linear-gradient(90deg,#f97316,#d946ef);"></div></div><span class="bar-val" style="color:#f97316;">31%</span></div>
+                </div>
+                <div style="margin-bottom:0.38rem;">
+                    <div class="bar-label">Substance Use Disorder (SUD)</div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><div class="bar-track" style="flex:1;"><div class="bar-fill" data-width="39" style="background:linear-gradient(90deg,#a78bfa,#d946ef);"></div></div><span class="bar-val" style="color:#a78bfa;">39%</span></div>
+                </div>
+                <div>
+                    <div class="bar-label">Eating Disorders — 3.6× more common in girls with Attention Deficit Hyperactivity Disorder (ADHD)<sup><a href="#ref6" onclick="jumpToRef('ref6');return false;">6</a></sup></div>
+                    <div style="display:flex;align-items:center;gap:0.4rem;"><div class="bar-track" style="flex:1;"><div class="bar-fill" data-width="60" style="background:linear-gradient(90deg,#14b8a6,#a78bfa);"></div></div><span class="bar-val" style="color:#14b8a6;">3.6×</span></div>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">Additional burdens</div>
+                <div class="border-card bc-pink" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">😴 <strong>60%</strong> of adults with Attention Deficit Hyperactivity Disorder (ADHD) screen positive for a sleep disorder<sup><a href="#ref6" onclick="jumpToRef('ref6');return false;">6</a></sup></div></div>
+                <div class="border-card bc-orange" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">🍷 <strong>36%</strong> lifetime alcohol use disorder — vs. 19% without Attention Deficit Hyperactivity Disorder (ADHD)<sup><a href="#ref14" onclick="jumpToRef('ref14');return false;">14</a></sup></div></div>
+                <div class="border-card bc-violet" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">💔 <strong>89%</strong> damaged self-confidence from years of self-blame for neurobiological symptoms<sup><a href="#ref6" onclick="jumpToRef('ref6');return false;">6</a></sup></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 7: ECONOMIC IMPACT -->
+<div class="slide" data-slide="7">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;right:-70px;background:#14b8a6;opacity:0.09;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-50px;left:-40px;background:#f97316;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#14b8a6;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Economic Impact</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">The economic cost of undiagnosed &amp; untreated Attention Deficit Hyperactivity Disorder (ADHD)</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;" class="reveal">
+            <div class="stat-card" style="border-top:2px solid #14b8a6;">
+                <div class="stat-big" style="color:#14b8a6;font-size:2rem;">$143–266B</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">Annual incremental Attention Deficit Hyperactivity Disorder (ADHD) costs in the United States (US)<sup><a href="#ref15" onclick="jumpToRef('ref15');return false;">15</a></sup></div>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #f97316;">
+                <div class="stat-big" style="color:#f97316;">83%</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">of total costs incurred by adults — mostly lost income &amp; productivity<sup><a href="#ref15" onclick="jumpToRef('ref15');return false;">15</a></sup></div>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #d946ef;">
+                <div class="stat-big" style="color:#d946ef;">€20K+</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">per-capita annual economic burden of adult Attention Deficit Hyperactivity Disorder (ADHD) (Denmark study)<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.8rem;" class="reveal">
+            <div>
+                <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">For individuals</div>
+                <div class="border-card bc-teal" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">💰 Adults with Attention Deficit Hyperactivity Disorder (ADHD) earn ~€12,000 less/year than siblings without<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div></div>
+                <div class="border-card bc-orange" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">📉 Under-employment, frequent job-changing, and career instability<sup><a href="#ref15" onclick="jumpToRef('ref15');return false;">15</a></sup></div></div>
+                <div class="border-card bc-pink" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🎓 Higher school dropout rates, fewer advanced degrees<sup><a href="#ref15" onclick="jumpToRef('ref15');return false;">15</a></sup></div></div>
+            </div>
+            <div>
+                <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">For governments &amp; society</div>
+                <div class="border-card bc-violet" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">🏛️ Higher welfare, disability, and public health costs<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div></div>
+                <div class="border-card bc-pink" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">⚖️ Higher criminal justice costs — untreated Attention Deficit Hyperactivity Disorder (ADHD) correlates with impulsive behaviour<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div></div>
+                <div class="border-card bc-teal" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🧾 Reduced tax base from lower income capacity &amp; greater benefit dependence<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 8: RELATIONSHIPS -->
+<div class="slide" data-slide="8">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-70px;right:-70px;background:#d946ef;opacity:0.09;"></div>
+        <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#f97316;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#d946ef;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Relationships &amp; Family</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">Attention Deficit Hyperactivity Disorder (ADHD) strains every relationship</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;" class="reveal">
+            <div class="stat-card" style="border-top:2px solid #d946ef;">
+                <div class="stat-big stat-glow" style="color:#d946ef;">2×</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">Divorce rate for Attention Deficit Hyperactivity Disorder (ADHD)-affected couples vs. general population<sup><a href="#ref17" onclick="jumpToRef('ref17');return false;">17</a></sup></div>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #f97316;">
+                <div class="stat-big" style="color:#f97316;">38%</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">of people with Attention Deficit Hyperactivity Disorder (ADHD) say their marriage has teetered close to divorce in the past<sup><a href="#ref17" onclick="jumpToRef('ref17');return false;">17</a></sup></div>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #a78bfa;">
+                <div class="stat-big" style="color:#a78bfa;">31%</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">only 31% of people with Attention Deficit Hyperactivity Disorder (ADHD) have <em>never</em> considered divorce<sup><a href="#ref17" onclick="jumpToRef('ref17');return false;">17</a></sup></div>
+            </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-top:0.8rem;" class="reveal">
+            <div>
+                <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">Relationship challenges</div>
+                <div class="border-card bc-pink" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">💬 Forgetting conversations, appointments &amp; commitments — perceived as carelessness, not a neurological symptom</div></div>
+                <div class="border-card bc-orange" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">⚡ Emotional dysregulation &amp; Rejection Sensitive Dysphoria (RSD) — extreme emotional responses to perceived rejection<sup><a href="#ref9" onclick="jumpToRef('ref9');return false;">9</a></sup></div></div>
+                <div class="border-card bc-violet" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🔄 "Parent-child" dynamic as partner over-compensates for Executive Dysfunction (difficulty with planning &amp; organisation)</div></div>
+            </div>
+            <div>
+                <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">Parenting with Attention Deficit Hyperactivity Disorder (ADHD)</div>
+                <div class="border-card bc-teal" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">👩‍👧 Strong genetic component — child is more likely to also have Attention Deficit Hyperactivity Disorder (ADHD)</div></div>
+                <div class="border-card bc-pink" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">😰 "Mum guilt" amplified by Executive Dysfunction (difficulty with planning, organising, initiating tasks) — inconsistent routines, missed events</div></div>
+                <div class="border-card bc-orange" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🏠 Domestic mental load disproportionately falls on women — Attention Deficit Hyperactivity Disorder (ADHD) makes this nearly impossible to manage<sup><a href="#ref9" onclick="jumpToRef('ref9');return false;">9</a></sup></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 9: TAIWAN / ASIA CULTURAL BARRIERS -->
+<div class="slide" data-slide="9">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:420px;height:420px;top:-90px;right:-80px;background:#f97316;opacity:0.11;"></div>
+        <div class="blob" style="width:280px;height:280px;bottom:-60px;left:-40px;background:#14b8a6;opacity:0.09;"></div>
+        <div class="blob" style="width:180px;height:180px;top:50%;left:40%;background:#d946ef;opacity:0.08;"></div>
+    </div>
+    <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content">
+        <p class="reveal" style="color:#f97316;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">🌏 Taiwan &amp; Asia — Cultural Lens</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">Cultural barriers amplify every other problem</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.75rem;" class="reveal">
+            <div class="border-card bc-orange">
+                <div style="font-size:0.76rem;font-weight:700;color:#f97316;margin-bottom:0.25rem;">🎭 Face (面子 / Miànzi) &amp; Shame</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Mental health diagnoses risk family shame and social stigma. Acknowledging a disorder is seen as exposing a family flaw to the community.<sup><a href="#ref18" onclick="jumpToRef('ref18');return false;">18</a></sup></div>
+            </div>
+            <div class="border-card bc-teal">
+                <div style="font-size:0.76rem;font-weight:700;color:#14b8a6;margin-bottom:0.25rem;">📚 Confucian Academic Pressure</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Extreme focus on academic achievement and discipline. Attention Deficit Hyperactivity Disorder (ADHD) symptoms misread as laziness, disobedience, or moral failing.<sup><a href="#ref19" onclick="jumpToRef('ref19');return false;">19</a></sup></div>
+            </div>
+            <div class="border-card bc-violet">
+                <div style="font-size:0.76rem;font-weight:700;color:#a78bfa;margin-bottom:0.25rem;">🤫 Silence &amp; Self-Reliance</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Filial Piety (孝順 / Xiàoshùn) — respecting and obeying elders — and collective harmony discourage self-advocacy. Girls especially are taught to be quiet and conforming.<sup><a href="#ref19" onclick="jumpToRef('ref19');return false;">19</a></sup></div>
+            </div>
+            <div class="border-card bc-pink">
+                <div style="font-size:0.76rem;font-weight:700;color:#d946ef;margin-bottom:0.25rem;">🏆 Model Minority Myth</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Asian students expected to excel academically — high achievers are less likely to be flagged. Internalised stereotype increases Attention Deficit Hyperactivity Disorder (ADHD) stigma significantly.<sup><a href="#ref20" onclick="jumpToRef('ref20');return false;">20</a></sup></div>
+            </div>
+            <div class="border-card bc-orange">
+                <div style="font-size:0.76rem;font-weight:700;color:#f97316;margin-bottom:0.25rem;">🔬 Lack of Culturally Adapted Tools</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Diagnostic criteria developed in Western populations. No Taiwan-specific Attention Deficit Hyperactivity Disorder (ADHD) norms for girls. Clinicians under-equipped for cultural nuance.<sup><a href="#ref3" onclick="jumpToRef('ref3');return false;">3</a></sup></div>
+            </div>
+            <div class="border-card bc-teal">
+                <div style="font-size:0.76rem;font-weight:700;color:#14b8a6;margin-bottom:0.25rem;">👩‍⚕️ Gender Role Expectations</div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Women expected to be organised, caregiving, and emotionally stable. Attention Deficit Hyperactivity Disorder (ADHD) chaos is hidden to fulfil role expectations — extreme masking pressure.<sup><a href="#ref18" onclick="jumpToRef('ref18');return false;">18</a></sup></div>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top:0.75rem;background:rgba(249,115,22,0.08);border-radius:10px;padding:0.6rem 0.9rem;font-size:0.71rem;color:#c9d1d9;">
+            📊 Taiwan National Health Insurance (NHI) data: Adult Attention Deficit Hyperactivity Disorder (ADHD) diagnosis rate is <strong style="color:#f97316;">0.028%</strong> — compared to <strong style="color:#14b8a6;">~3–5%</strong> in Western countries. The gap is not biological — it is cultural and systemic.<sup><a href="#ref5" onclick="jumpToRef('ref5');return false;">5</a></sup><sup><a href="#ref3" onclick="jumpToRef('ref3');return false;">3</a></sup>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 10: GOVERNMENTS -->
+<div class="slide" data-slide="10">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;right:-70px;background:#14b8a6;opacity:0.10;"></div>
+        <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#a78bfa;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#14b8a6;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Policy Perspective</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">What governments should care about</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;" class="reveal">
+            <div>
+                <div style="font-size:0.78rem;font-weight:700;color:#14b8a6;margin-bottom:0.45rem;">Public Health &amp; Fiscal Costs</div>
+                <div class="border-card bc-teal" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">🏥 Untreated Attention Deficit Hyperactivity Disorder (ADHD) drives higher use of emergency psychiatric services, hospitalisations, and welfare dependency<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div></div>
+                <div class="border-card bc-violet" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">⚖️ Higher criminal justice costs — impulsive behaviour without support leads to legal consequences<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup></div></div>
+                <div class="border-card bc-teal" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">📉 Reduced Gross Domestic Product (GDP) contribution: lower educational attainment, higher unemployment rates<sup><a href="#ref15" onclick="jumpToRef('ref15');return false;">15</a></sup></div></div>
+            </div>
+            <div>
+                <div style="font-size:0.78rem;font-weight:700;color:#a78bfa;margin-bottom:0.45rem;">Policy Levers</div>
+                <div class="border-card bc-violet" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">🏫 Update school Attention Deficit Hyperactivity Disorder (ADHD) screening to include female-typical presentations<sup><a href="#ref7" onclick="jumpToRef('ref7');return false;">7</a></sup></div></div>
+                <div class="border-card bc-pink" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">👩‍⚕️ Require gender-inclusive training in medical &amp; psychology education programmes<sup><a href="#ref4" onclick="jumpToRef('ref4');return false;">4</a></sup></div></div>
+                <div class="border-card bc-teal" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">💊 Fund research on hormonal impacts on Attention Deficit Hyperactivity Disorder (ADHD) treatment response<sup><a href="#ref11" onclick="jumpToRef('ref11');return false;">11</a></sup></div></div>
+                <div class="border-card bc-orange" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🇹🇼 Taiwan-specific: Expand National Health Insurance (NHI) Attention Deficit Hyperactivity Disorder (ADHD) coverage for adults + public anti-stigma campaigns<sup><a href="#ref5" onclick="jumpToRef('ref5');return false;">5</a></sup></div></div>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top:0.75rem;background:rgba(20,184,166,0.07);border-radius:10px;padding:0.6rem 0.9rem;font-size:0.71rem;color:#c9d1d9;">
+            💡 Research shows treating Attention Deficit Hyperactivity Disorder (ADHD) <em>reduces</em> long-term costs: less welfare dependency, fewer hospitalisations, more productive workforce participation.<sup><a href="#ref16" onclick="jumpToRef('ref16');return false;">16</a></sup>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 11: COMPANIES -->
+<div class="slide" data-slide="11">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;left:-70px;background:#a78bfa;opacity:0.10;"></div>
+        <div class="blob" style="width:240px;height:240px;bottom:-50px;right:-40px;background:#14b8a6;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#a78bfa;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Business Case</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">What companies should care about</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;" class="reveal">
+            <div>
+                <div style="font-size:0.78rem;font-weight:700;color:#a78bfa;margin-bottom:0.45rem;">Hidden Costs of Inaction</div>
+                <div class="border-card bc-violet" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">💸 Unaddressed mental health costs US employers ~<strong>$100B/year</strong> in lost productivity<sup><a href="#ref21" onclick="jumpToRef('ref21');return false;">21</a></sup></div></div>
+                <div class="border-card bc-orange" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">🏥 Mental illness = 30% of disability costs, growing 10%/year<sup><a href="#ref21" onclick="jumpToRef('ref21');return false;">21</a></sup></div></div>
+                <div class="border-card bc-violet" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🔄 High turnover from undiagnosed Attention Deficit Hyperactivity Disorder (ADHD) — talent lost repeatedly before root cause identified<sup><a href="#ref22" onclick="jumpToRef('ref22');return false;">22</a></sup></div></div>
+            </div>
+            <div>
+                <div style="font-size:0.78rem;font-weight:700;color:#14b8a6;margin-bottom:0.45rem;">The Neurodiversity Dividend</div>
+                <div class="border-card bc-teal" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">🚀 Attention Deficit Hyperactivity Disorder (ADHD) employees often show exceptional creativity, hyperfocus, rapid ideation &amp; crisis problem-solving<sup><a href="#ref23" onclick="jumpToRef('ref23');return false;">23</a></sup></div></div>
+                <div class="border-card bc-pink" style="margin-bottom:0.4rem;"><div style="font-size:0.71rem;color:#c9d1d9;">📈 82% of US adults say employers need better education on neurodivergent employee support<sup><a href="#ref22" onclick="jumpToRef('ref22');return false;">22</a></sup></div></div>
+                <div class="border-card bc-teal" style="margin-bottom:0;"><div style="font-size:0.71rem;color:#c9d1d9;">🧩 Neuro-inclusive workplaces improve retention, collaboration, and problem-solving for <em>everyone</em><sup><a href="#ref24" onclick="jumpToRef('ref24');return false;">24</a></sup></div></div>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top:0.75rem;">
+            <div style="font-size:0.76rem;font-weight:700;color:#c9d1d9;margin-bottom:0.45rem;">Simple high-impact accommodations</div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <span class="pill pill-violet">Flexible hours &amp; remote work</span>
+                <span class="pill pill-teal">Written instructions (not only verbal)</span>
+                <span class="pill pill-pink">Quiet / low-stimulation spaces</span>
+                <span class="pill pill-orange">Clear deadlines &amp; task chunking</span>
+                <span class="pill pill-violet">Attention Deficit Hyperactivity Disorder (ADHD) coaching &amp; Employee Assistance Programme (EAP) access</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 12: LATEST RESEARCH -->
+<div class="slide" data-slide="12">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:400px;height:400px;top:-90px;right:-70px;background:#d946ef;opacity:0.11;"></div>
+        <div class="blob" style="width:260px;height:260px;bottom:-50px;left:-40px;background:#a78bfa;opacity:0.08;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#d946ef;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Research Frontiers</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">Latest advances &amp; directions (2024–2026)</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;" class="reveal">
+            <div class="border-card bc-pink">
+                <div style="font-size:0.76rem;font-weight:700;color:#d946ef;margin-bottom:0.25rem;">🧬 Hormones &amp; Attention Deficit Hyperactivity Disorder (ADHD) — Eunethydis 2025<sup><a href="#ref7" onclick="jumpToRef('ref7');return false;">7</a></sup></div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Confirms hormonal transitions exacerbate Attention Deficit Hyperactivity Disorder (ADHD) across the female lifespan. Calls for longitudinal, sex-specific studies and individualised dosing protocols.</div>
+            </div>
+            <div class="border-card bc-violet">
+                <div style="font-size:0.76rem;font-weight:700;color:#a78bfa;margin-bottom:0.25rem;">💊 Treatment — Oxford / Southampton 2026<sup><a href="#ref25" onclick="jumpToRef('ref25');return false;">25</a></sup></div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Largest-ever review (200+ meta-analyses): stimulants &amp; atomoxetine best for short-term symptoms. Mindfulness (Mind-Based practice) is the only intervention showing large benefits at extended follow-up.</div>
+            </div>
+            <div class="border-card bc-orange">
+                <div style="font-size:0.76rem;font-weight:700;color:#f97316;margin-bottom:0.25rem;">🔬 Masking research — Frontiers 2026<sup><a href="#ref10" onclick="jumpToRef('ref10');return false;">10</a></sup></div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">First empirical confirmation: excessive masking causes constant behavioural monitoring, emotional exhaustion, reduced self-efficacy, and well-being decline.</div>
+            </div>
+            <div class="border-card bc-teal">
+                <div style="font-size:0.76rem;font-weight:700;color:#14b8a6;margin-bottom:0.25rem;">💉 Oestradiol (E2) &amp; dopamine — PubMed 2025<sup><a href="#ref12" onclick="jumpToRef('ref12');return false;">12</a></sup></div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">Oestradiol (E2, the primary oestrogen) modulates dopamine transmission. Low oestradiol = impaired dopaminergic (dopamine system) function = worsened Attention Deficit Hyperactivity Disorder (ADHD). Progesterone may blunt stimulant effectiveness.</div>
+            </div>
+            <div class="border-card bc-pink" style="grid-column:1/-1;margin-bottom:0;">
+                <div style="font-size:0.76rem;font-weight:700;color:#d946ef;margin-bottom:0.25rem;">📢 Neurodiversity at Work — Understood.org 2025<sup><a href="#ref22" onclick="jumpToRef('ref22');return false;">22</a></sup></div>
+                <div style="font-size:0.71rem;color:#c9d1d9;">30% of US adults now self-advocate for workplace accommodations (up from 25% in 2024). Among neurodivergent adults: 51% requested accommodations in 2025. Workplace inclusion is accelerating globally.</div>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top:0.7rem;font-size:0.7rem;color:#8b949e;background:rgba(217,70,239,0.07);border-radius:8px;padding:0.5rem 0.8rem;">
+            🔭 Key research gaps: Long-term treatment outcomes, cycle-adjusted medication dosing, Taiwan/Asia-specific prevalence studies, culturally adapted diagnostic tools.
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 13: WHAT YOU CAN DO -->
+<div class="slide" data-slide="13">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:380px;height:380px;top:-80px;right:-70px;background:#f97316;opacity:0.10;"></div>
+        <div class="blob" style="width:250px;height:250px;bottom:-50px;left:-40px;background:#14b8a6;opacity:0.09;"></div>
+    </div>
+    <div class="content">
+        <p class="reveal" style="color:#f97316;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Action</p>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.4rem,2.8vw,2.1rem);margin:0 0 0.9rem;">What you can do — at every level</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;" class="reveal">
+            <div class="stat-card" style="border-top:2px solid #d946ef;">
+                <div style="font-size:0.78rem;font-weight:700;color:#d946ef;margin-bottom:0.55rem;">👩 For Individuals</div>
+                <ul style="font-size:0.71rem;color:#c9d1d9;line-height:1.75;padding-left:1rem;margin:0;">
+                    <li>Track symptoms through your menstrual cycle — pattern is informative</li>
+                    <li>Seek evaluation — Attention Deficit Hyperactivity Disorder (ADHD) in women is real &amp; treatable</li>
+                    <li>Join peer support groups (online Mandarin resources available)</li>
+                    <li>Explore Cognitive Behavioural Therapy (CBT), coaching, and medication combined<sup><a href="#ref25" onclick="jumpToRef('ref25');return false;">25</a></sup></li>
+                </ul>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #f97316;">
+                <div style="font-size:0.78rem;font-weight:700;color:#f97316;margin-bottom:0.55rem;">👨‍👩‍👧 For Families</div>
+                <ul style="font-size:0.71rem;color:#c9d1d9;line-height:1.75;padding-left:1rem;margin:0;">
+                    <li>Understand Attention Deficit Hyperactivity Disorder (ADHD) is neurobiological — not laziness or bad parenting</li>
+                    <li>Share domestic mental load deliberately and consistently</li>
+                    <li>Reduce shame in conversation around diagnosis</li>
+                    <li>Support children showing inattentive symptoms to be evaluated early</li>
+                </ul>
+            </div>
+            <div class="stat-card" style="border-top:2px solid #14b8a6;">
+                <div style="font-size:0.78rem;font-weight:700;color:#14b8a6;margin-bottom:0.55rem;">🏛️ For Society / Taiwan</div>
+                <ul style="font-size:0.71rem;color:#c9d1d9;line-height:1.75;padding-left:1rem;margin:0;">
+                    <li>Destigmatise mental health in Mandarin media &amp; education</li>
+                    <li>Train teachers to recognise female-typical Attention Deficit Hyperactivity Disorder (ADHD)</li>
+                    <li>Expand National Health Insurance (NHI) to cover adult Attention Deficit Hyperactivity Disorder (ADHD) assessment &amp; treatment</li>
+                    <li>Develop Taiwan-specific Attention Deficit Hyperactivity Disorder (ADHD) research norms for girls &amp; women</li>
+                </ul>
+            </div>
+        </div>
+        <div class="reveal" style="margin-top:0.8rem;background:rgba(249,115,22,0.07);border-radius:10px;padding:0.6rem 0.9rem;font-size:0.71rem;color:#c9d1d9;">
+            ✅ Early intervention produces substantially better long-term outcomes for academic performance, mental health, and self-esteem.<sup><a href="#ref26" onclick="jumpToRef('ref26');return false;">26</a></sup>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 14: BOTTOM LINE -->
+<div class="slide" data-slide="14">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:520px;height:520px;top:-120px;right:-100px;background:#d946ef;opacity:0.14;"></div>
+        <div class="blob" style="width:320px;height:320px;bottom:-80px;left:-60px;background:#f97316;opacity:0.10;"></div>
+        <div class="blob" style="width:220px;height:220px;top:40%;left:12%;background:#a78bfa;opacity:0.10;"></div>
+    </div>
+    <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1;"></canvas>
+    <div class="content text-center">
+        <div class="reveal" style="font-size:68px;animation:float 3s ease-in-out infinite;margin-bottom:0.8rem;">💜</div>
+        <h2 class="reveal" style="font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,4vw,3.2rem);background:linear-gradient(135deg,#d946ef,#f97316,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:0 0 1rem;">The Bottom Line</h2>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;max-width:880px;margin:0 auto;" class="reveal">
+            <div class="stat-card" style="text-align:left;">
+                <div class="stat-big glow-pulse" style="color:#d946ef;font-size:2rem;">Millions</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">of women living with Attention Deficit Hyperactivity Disorder (ADHD) — undiagnosed, unmedicated, and exhausted<sup><a href="#ref2" onclick="jumpToRef('ref2');return false;">2</a></sup></div>
+            </div>
+            <div class="stat-card" style="text-align:left;">
+                <div class="stat-big glow-pulse" style="color:#f97316;font-size:2rem;">Decades</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">of delayed diagnosis — the average woman waits years longer than a man for accurate identification<sup><a href="#ref4" onclick="jumpToRef('ref4');return false;">4</a></sup></div>
+            </div>
+            <div class="stat-card" style="text-align:left;">
+                <div class="stat-big glow-pulse" style="color:#a78bfa;font-size:2rem;">Solvable</div>
+                <div style="font-size:0.71rem;color:#8b949e;margin-top:0.3rem;">With awareness, better tools, cultural shift, and targeted support — outcomes improve dramatically<sup><a href="#ref26" onclick="jumpToRef('ref26');return false;">26</a></sup></div>
+            </div>
+        </div>
+        <p class="reveal" style="font-size:0.78rem;color:#8b949e;margin-top:1rem;max-width:620px;margin-left:auto;margin-right:auto;">This is not just a women's issue. It is a public health, economic, and social equity issue.</p>
+        <p class="reveal" style="font-size:0.7rem;color:#8b949e;margin-top:0.5rem;">→ Slide 15 contains all 26 clickable references</p>
+    </div>
+</div>
+
+<!-- SLIDE 15: REFERENCES -->
+<div class="slide refs-slide" data-slide="15">
+    <div class="gradient-mesh">
+        <div class="blob" style="width:300px;height:300px;top:-60px;right:-50px;background:#a78bfa;opacity:0.07;"></div>
+        <div class="blob" style="width:200px;height:200px;bottom:-40px;left:-30px;background:#d946ef;opacity:0.06;"></div>
+    </div>
+    <div class="content">
+        <p style="color:#d946ef;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:0.4rem;">Sources</p>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(1.2rem,2.2vw,1.7rem);margin:0 0 0.9rem;">References &amp; Citations</h2>
+        <div id="ref1" class="ref-item"><span class="ref-num">1</span><span>Mental Health Stats / ADHD Evidence. <em>ADHD in Adults (18+) — 2026.</em> Global prevalence 6.76%, ~366M symptomatic adults worldwide. <a href="https://mhstats.org/adults/adhd/" target="_blank">mhstats.org/adults/adhd</a> · <a href="https://www.adhdevidence.org/blog/new-estimates-on-worldwide-prevalence-of-adhd" target="_blank">adhdevidence.org</a></span></div>
+        <div id="ref2" class="ref-item"><span class="ref-num">2</span><span>Attoe &amp; Climie (2023). <em>Miss. Diagnosis: A Systematic Review of Attention Deficit Hyperactivity Disorder (ADHD) in Adult Women.</em> Journal of Attention Disorders. Childhood 3:1 male/female ratio; near parity in adulthood. <a href="https://hcn.health/hcn-trends-story/miss-diagnosis-a-systematic-review-of-adhd-in-adult-women/" target="_blank">hcn.health</a></span></div>
+        <div id="ref3" class="ref-item"><span class="ref-num">3</span><span>Taipei Medical University (TMU). <em>Under-diagnosis of Attention Deficit Hyperactivity Disorder (ADHD) in children in Taiwan.</em> Diagnosed prevalence 0.59%; community prevalence ~5%. National Health Insurance Research Database (2005). <a href="https://hub.tmu.edu.tw/en/publications/under-diagnosis-of-attention-deficit-hyperactivity-disorder-in-on/" target="_blank">hub.tmu.edu.tw</a></span></div>
+        <div id="ref4" class="ref-item"><span class="ref-num">4</span><span>MindMetrix / Open Access Pub (2024). <em>Attention Deficit Hyperactivity Disorder (ADHD) in Women: The Epidemic of Missed Diagnoses &amp; Unveiling Gender Disparities in Attention Deficit Hyperactivity Disorder (ADHD).</em> Boys diagnosed 2–3× more; up to 75% of women misdiagnosed. <a href="https://mindmetrix.com/blog/adhd-in-women-the-epidemic-of-missed-diagnoses" target="_blank">mindmetrix.com</a> · <a href="https://openaccesspub.org/womans-mental-health/article/2125" target="_blank">openaccesspub.org</a></span></div>
+        <div id="ref5" class="ref-item"><span class="ref-num">5</span><span>Academia Sinica (2016). <em>Trend, characteristics, and pharmacotherapy of adults diagnosed with Attention Deficit Hyperactivity Disorder (ADHD): nationwide survey in Taiwan.</em> Cumulative adult prevalence 0.028%; incidence grew 10.9× (2000–2011). <a href="https://www.academia.edu/90493688" target="_blank">academia.edu</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6998980/" target="_blank">PubMed Central (PMC6998980)</a></span></div>
+        <div id="ref6" class="ref-item"><span class="ref-num">6</span><span>Understood.org (2024). <em>Research: Critical Gaps in Support for Women with Attention Deficit Hyperactivity Disorder (ADHD).</em> 72% have 3+ conditions; 89% damaged self-confidence; 44% first diagnosed with wrong condition. <a href="https://www.understood.org/en/press-releases/understood-research-women-adhd" target="_blank">understood.org/en/press-releases/understood-research-women-adhd</a></span></div>
+        <div id="ref7" class="ref-item"><span class="ref-num">7</span><span>Eunethydis Special Interest Group on Female Attention Deficit Hyperactivity Disorder (ADHD) (2025). <em>Research advances and future directions in female Attention Deficit Hyperactivity Disorder (ADHD).</em> Frontiers in Global Women's Health. <a href="https://www.frontiersin.org/journals/global-womens-health/articles/10.3389/fgwh.2025.1613628/full" target="_blank">frontiersin.org</a> · <a href="https://eprints.soton.ac.uk/503778/" target="_blank">soton.ac.uk</a></span></div>
+        <div id="ref8" class="ref-item"><span class="ref-num">8</span><span>ZipDo Education Reports (2026). <em>Attention Deficit Hyperactivity Disorder (ADHD) Misdiagnosis Statistics.</em> Women 4× more likely misdiagnosed with Major Depressive Disorder (MDD); girls 3× for anxiety; 70% misdiagnosed. <a href="https://zipdo.co/adhd-misdiagnosis-statistics/" target="_blank">zipdo.co/adhd-misdiagnosis-statistics</a></span></div>
+        <div id="ref9" class="ref-item"><span class="ref-num">9</span><span>Nature Scientific Reports (2025). <em>Adverse experiences of women with undiagnosed Attention Deficit Hyperactivity Disorder (ADHD) and the invaluable role of diagnosis.</em> Masking, burnout, mental health outcomes. <a href="https://www.nature.com/articles/s41598-025-04782-y" target="_blank">nature.com/articles/s41598-025-04782-y</a></span></div>
+        <div id="ref10" class="ref-item"><span class="ref-num">10</span><span>Frontiers in Psychology (2026). <em>Attention Deficit Hyperactivity Disorder (ADHD) Masking: Empirical Evidence.</em> Excessive masking = emotional exhaustion, reduced self-efficacy. <a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1807337/full" target="_blank">frontiersin.org (fpsyg.2026.1807337)</a> · <a href="https://add.org/adhd-masking/" target="_blank">ADDA.org</a></span></div>
+        <div id="ref11" class="ref-item"><span class="ref-num">11</span><span>University of Kentucky &amp; University of Illinois Chicago (2024). <em>Attention Deficit Hyperactivity Disorder (ADHD) and the Menstrual Cycle.</em> Hormones and Behaviour (Feb 2024). Estrogen decline worsens hyperactivity/impulsivity post-ovulation. <a href="https://bellehealth.co/research-adhd-menstrual-cycle/" target="_blank">bellehealth.co/research-adhd-menstrual-cycle</a></span></div>
+        <div id="ref12" class="ref-item"><span class="ref-num">12</span><span>PubMed Central / Hrcak (2025). <em>Should we consider sex hormone fluctuations relevant in Attention Deficit Hyperactivity Disorder (ADHD)? Systematic Review.</em> Oestradiol (E2) modulates dopamine; women may need cycle-adjusted stimulant dosing. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12145478/" target="_blank">PMC12145478</a> · <a href="https://hrcak.srce.hr/file/496823" target="_blank">hrcak.srce.hr</a></span></div>
+        <div id="ref13" class="ref-item"><span class="ref-num">13</span><span>Fuller-Thomson et al. / University of Toronto (2016, reconfirmed 2024). <em>One third of women with Attention Deficit Hyperactivity Disorder (ADHD) have anxiety; almost half have considered suicide.</em> ScienceDaily. 46% suicidal ideation, 36% Generalised Anxiety Disorder (GAD), 31% Major Depressive Disorder (MDD), 39% Substance Use Disorder (SUD). <a href="https://www.sciencedaily.com/releases/2016/07/160720122838.htm" target="_blank">sciencedaily.com</a></span></div>
+        <div id="ref14" class="ref-item"><span class="ref-num">14</span><span>Canadian Attention Deficit Disorder Resource Alliance (CADDAC). <em>Girls and Women with Attention Deficit Hyperactivity Disorder (ADHD): Our Missed, Forgotten and Misunderstood.</em> 24% lifetime suicide attempt rate; 36% alcohol use disorder. <a href="https://caddac.ca/wp-content/uploads/Girls-and-Women-with-ADHD-FINAL-1.pdf" target="_blank">caddac.ca (PDF)</a></span></div>
+        <div id="ref15" class="ref-item"><span class="ref-num">15</span><span>Sciberras et al. / Tufts Medical Center (2022). <em>Economic impact of childhood and adult Attention Deficit Hyperactivity Disorder (ADHD).</em> US $143–266B annual costs; 83% adult; $87–138B workplace productivity loss. <a href="https://cevr.tuftsmedicalcenter.org/publications/economic-impact-of-childhood-and-adult-attention-deficit-hyperactivity-disorder" target="_blank">cevr.tuftsmedicalcenter.org</a> · <a href="https://journals.sagepub.com/doi/abs/10.1177/1087054720961828" target="_blank">SAGE Journals</a></span></div>
+        <div id="ref16" class="ref-item"><span class="ref-num">16</span><span>Attention Deficit Hyperactivity Disorder (ADHD) Evidence (2023). <em>The Economic Burden of Attention Deficit Hyperactivity Disorder (ADHD)</em> — Denmark cohort study. €20K+ per-capita annual burden; €12K income gap; €12,400 net public cost per person/year. <a href="https://www.adhdevidence.org/blog/the-economic-burden-of-adhd" target="_blank">adhdevidence.org/blog/the-economic-burden-of-adhd</a></span></div>
+        <div id="ref17" class="ref-item"><span class="ref-num">17</span><span>ADDitude Magazine / Calendar UK (2018–2024). <em>Divorce and Attention Deficit Hyperactivity Disorder (ADHD).</em> Divorce rate 2× general population; 38% near-divorce; only 31% never considered it. <a href="https://www.additudemag.com/adhd-marriage-statistics-personal-stories/" target="_blank">additudemag.com</a> · <a href="https://www.calendar-uk.co.uk/frequently-asked-questions/can-a-marriage-survive-adhd" target="_blank">calendar-uk.co.uk</a></span></div>
+        <div id="ref18" class="ref-item"><span class="ref-num">18</span><span>ADDitude Magazine (2025). <em>I Have a Voice Too: On Being an Asian American with Attention Deficit Hyperactivity Disorder (ADHD).</em> Taiwanese American experience; Filial Piety (孝順), face-saving, Model Minority barriers. <a href="https://www.additudemag.com/asian-american-adhd-self-advocacy/" target="_blank">additudemag.com/asian-american-adhd-self-advocacy</a></span></div>
+        <div id="ref19" class="ref-item"><span class="ref-num">19</span><span>Krishna Vora Therapy (2025). <em>Understanding Attention Deficit Hyperactivity Disorder (ADHD) in South Asian Women.</em> Cultural conformity, stigma, Confucian academic pressure, barriers to diagnosis. <a href="https://krishnavoratherapy.ca/2025/05/09/understanding-adhd-in-south-asian-women-challenges-and-strategies/" target="_blank">krishnavoratherapy.ca</a></span></div>
+        <div id="ref20" class="ref-item"><span class="ref-num">20</span><span>Sara Chung PhD / University of California San Francisco (UCSF) Grand Rounds (2024). <em>Insights into Attention Deficit Hyperactivity Disorder (ADHD) Treatment: Disparities in Asian American Communities.</em> Model Minority Myth internalisation increases Attention Deficit Hyperactivity Disorder (ADHD) stigma. <a href="https://www.youtube.com/watch?v=auUlI_9R5Uw" target="_blank">youtube.com/watch?v=auUlI_9R5Uw</a></span></div>
+        <div id="ref21" class="ref-item"><span class="ref-num">21</span><span>Children and Adults with Attention Deficit Hyperactivity Disorder (CHADD) (2018). <em>Attention Deficit Hyperactivity Disorder's (ADHD's) Impact on Business.</em> ~$100B/year indirect employer cost (US); mental illness = 30% of disability costs. <a href="https://chadd.org/adhd-weekly/adhds-impact-on-business/" target="_blank">chadd.org/adhd-weekly/adhds-impact-on-business</a></span></div>
+        <div id="ref22" class="ref-item"><span class="ref-num">22</span><span>Understood.org (2025). <em>2025 Neurodiversity at Work Survey.</em> 82% say employers need better education; 51% of neurodivergent adults requested accommodations. <a href="https://www.understood.org/en/press-releases/2025-neurodiversity-at-work-survey" target="_blank">understood.org/en/press-releases/2025-neurodiversity-at-work-survey</a></span></div>
+        <div id="ref23" class="ref-item"><span class="ref-num">23</span><span>Journal of Organizational Psychology (2024). <em>Neurodivergence and the Workplace.</em> Attention Deficit Hyperactivity Disorder (ADHD) associated with creativity, energy, rapid problem-solving strengths. <a href="https://articlegateway.com/index.php/JOP/article/download/7481/7071/12588" target="_blank">articlegateway.com</a></span></div>
+        <div id="ref24" class="ref-item"><span class="ref-num">24</span><span>Canadian Centre for Rehabilitation and Work (CCRW) (2025). <em>Diverse Minds: Creating Inclusive Workplaces for Neurodivergent Workers.</em> Neuro-inclusion improves retention, performance, and well-being. <a href="https://ccrw.org" target="_blank">ccrw.org</a></span></div>
+        <div id="ref25" class="ref-item"><span class="ref-num">25</span><span>University of Oxford / University of Southampton (2026). <em>A massive Attention Deficit Hyperactivity Disorder (ADHD) study reveals what actually works.</em> 200+ meta-analyses; stimulants + Cognitive Behavioural Therapy (CBT) best; mindfulness shows large extended benefit. ScienceDaily. <a href="https://www.sciencedaily.com/releases/2026/02/260208233825.htm" target="_blank">sciencedaily.com (2026/02/260208233825)</a></span></div>
+        <div id="ref26" class="ref-item"><span class="ref-num">26</span><span>Learning Disabilities Resource Foundation of America (LDRFA) / Qbtech (2025). <em>Attention Deficit Hyperactivity Disorder (ADHD) Research in 2025 &amp; A Clinician's Guide to Attention Deficit Hyperactivity Disorder (ADHD) in 2025.</em> Early intervention improves long-term outcomes. <a href="https://www.ldrfa.org/latest-adhd-research/" target="_blank">ldrfa.org</a> · <a href="https://www.qbtech.com/blog/clinicians-guide-to-adhd-in-2025/" target="_blank">qbtech.com</a></span></div>
+    </div>
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav-controls">
+    <button class="nav-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <div class="slide-dots" id="dots"></div>
+    <button class="nav-btn" onclick="changeSlide(1)">&#8250;</button>
+    <span class="slide-counter" id="counter">1 / 15</span>
+</div>
+
+<script>
+    let current = 1;
+    const total = document.querySelectorAll('.slide').length;
+    const dotsContainer = document.getElementById('dots');
+    const counter = document.getElementById('counter');
+    for (let i = 1; i <= total; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 1 ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+    }
+    function goToSlide(n) {
+        const prev = document.querySelector('.slide.active');
+        const next = document.querySelector(`.slide[data-slide="${n}"]`);
+        if (prev) prev.classList.remove('active');
+        if (next) { next.classList.add('active'); animateSlide(next); }
+        current = n; updateNav();
+    }
+    function changeSlide(dir) { let n = current + dir; if (n < 1) n = total; if (n > total) n = 1; goToSlide(n); }
+    function updateNav() {
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i + 1 === current));
+        counter.textContent = current + ' / ' + total;
+    }
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+    });
+    let tx = 0;
+    document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+    document.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].clientX; if (Math.abs(d) > 50) changeSlide(d > 0 ? 1 : -1); });
+
+    function animateSlide(slide) {
+        slide.querySelectorAll('.reveal').forEach((el, i) => {
+            el.style.transition = 'none'; el.style.opacity = '0'; el.style.transform = 'translateY(20px)';
+            el.offsetHeight;
+            const delay = i * 0.09;
+            el.style.transition = `opacity 0.38s ease ${delay}s, transform 0.38s ease ${delay}s`;
+            el.style.opacity = '1'; el.style.transform = 'translateY(0px)';
+        });
+        animateSlideEffects(slide);
+    }
+    function animateSlideEffects(slide) {
+        slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar, i) => {
+            bar.classList.add('fill-init');
+            bar.style.width = '0%'; bar.style.transition = `width 0.75s ease ${i * 0.1}s`;
+            bar.offsetHeight; bar.style.width = bar.dataset.width + '%';
+        });
+    }
+    document.addEventListener('mousemove', e => {
+        const s = document.querySelector('.mouse-spotlight');
+        if (s) s.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(217,70,239,0.055), transparent 40%)`;
+    });
+    window.initParticles = function(canvas, opts) {
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight;
+        const interactive = opts.interactive !== false;
+        const count = opts.count || (interactive ? 50 : 16);
+        let mx = -1000, my = -1000;
+        const ps = Array.from({length: count}, () => ({
+            x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+            vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+            size: Math.random()*2.2+0.7, alpha: Math.random()*0.28+0.08
+        }));
+        if (interactive) {
+            canvas.addEventListener('mousemove', e => { const r=canvas.getBoundingClientRect(); mx=e.clientX-r.left; my=e.clientY-r.top; });
+            canvas.addEventListener('mouseleave', () => { mx=-1000; my=-1000; });
+        }
+        (function animate() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ps.forEach(p => {
+                if (interactive) { const dx=p.x-mx,dy=p.y-my,d=Math.sqrt(dx*dx+dy*dy); if(d<120){const f=(120-d)/120*2; p.vx+=(dx/d)*f*0.1; p.vy+=(dy/d)*f*0.1;} }
+                p.vx*=0.98; p.vy*=0.98; p.x+=p.vx; p.y+=p.vy;
+                if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+                if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+                ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+                ctx.fillStyle=`rgba(217,70,239,${p.alpha})`; ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        })();
+    };
+    document.querySelectorAll('.particle-canvas').forEach(c => window.initParticles(c, {interactive:true,count:50}));
+    document.querySelectorAll('.particle-canvas-ambient').forEach(c => window.initParticles(c, {interactive:false,count:16}));
+
+    function jumpToRef(refId) {
+        goToSlide(15);
+        setTimeout(function() {
+            var target = document.getElementById(refId);
+            if (!target) return;
+            // scrollIntoView works on the element itself
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Flash highlight
+            target.style.transition = 'background 0.5s ease';
+            target.style.background = 'rgba(217,70,239,0.25)';
+            target.style.borderRadius = '6px';
+            target.style.padding = '2px 4px';
+            setTimeout(function() {
+                target.style.background = 'transparent';
+            }, 2500);
+        }, 800);
+    }
+
+    try { animateSlide(document.querySelector('.slide.active')); } catch(e) { console.warn(e); }
+</script>
+</body>
+</html>
